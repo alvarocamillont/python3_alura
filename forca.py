@@ -1,25 +1,45 @@
-"""Fonte do curso de python alura"""
+def jogar():
+    print("*********************************")
+    print("***Bem vindo ao jogo da Forca!***")
+    print("*********************************")
 
-def forca():
-    """ Jogo de forca """
-    print(38 * "*")
-    print(5  * "*", 'Bem Vindo ao Jogo da Força', 5 * '*')
-    print(38 * '*')
+    palavra_secreta = "banana".upper()
+    letras_acertadas = ["_" for letra in palavra_secreta]
 
-    palavar_secreta = 'banana'
     enforcou = False
     acertou = False
+    erros = 0
 
-    while not enforcou and not acertou:
-        chute = input('Qual é a letra? ')
+    print(letras_acertadas)
 
-        index = 0
-        for letra in palavar_secreta:
-            if (chute.upper() == letra.upper()):
-                print(f'Encontrei a letra {letra} na posição {index}')
-            index = index + 1
+    while(not enforcou and not acertou):
 
+        chute = input("Qual letra? ")
+        chute = chute.strip().upper()
+
+        if (chute in palavra_secreta):
+            index = 0
+            for letra in palavra_secreta:
+                if(chute == letra):
+                    letras_acertadas[index] = letra
+                index += 1
+        else:
+            erros += 1
+            print(f"Ops, voce errou! Faltam {6-erros} tentativas.")
+
+        if (erros == 6):
+            break
+        if ("_" not in letras_acertadas):
+            break
+
+        print(letras_acertadas)
+
+    if("_" not in letras_acertadas):
+        print("Voce ganhou!!")
+    else:
+        print("Voce perdeu!!")
     print("Fim do jogo")
 
-if __name__ == '__main__':
-    forca()
+
+if(__name__ == "__main__"):
+    jogar()
