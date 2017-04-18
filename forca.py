@@ -6,18 +6,22 @@ def forca():
     print(5  * "*", 'Bem Vindo ao Jogo da Força', 5 * '*')
     print(38 * '*')
 
-    palavar_secreta = 'banana'
+    palavra_secreta = 'banana'
     enforcou = False
     acertou = False
+    letras_acertadas = ["_" for _ in palavra_secreta]
 
     while not enforcou and not acertou:
         chute = input('Qual é a letra? ')
 
         index = 0
-        for letra in palavar_secreta:
+        for letra in palavra_secreta:
             if (chute.upper() == letra.upper()):
                 print(f'Encontrei a letra {letra} na posição {index}')
+                index = palavra_secreta
+                letras_acertadas[index] = letra
             index = index + 1
+        print(str(letras_acertadas)
 
     print("Fim do jogo")
 
