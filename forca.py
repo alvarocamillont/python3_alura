@@ -1,29 +1,55 @@
-"""Fonte do curso de python alura"""
+import random
 
-def forca():
-    """ Jogo de forca """
-    print(38 * "*")
-    print(5  * "*", 'Bem Vindo ao Jogo da Força', 5 * '*')
-    print(38 * '*')
+def jogar():
+    print("*********************************")
+    print("***Bem vindo ao jogo da Forca!***")
+    print("*********************************")
 
-    palavra_secreta = 'banana'
+
+    arquivo = open("palavras.txt", "r")
+    palavras = []
+
+    for linha in arquivo:
+        linha = linha.strip()
+        palavras.append(linha)
+
+    arquivo.close()
+
+    numero = random.randrange(0,len(palavras))
+    palavra_secreta = palavras[numero].upper()
+
+    letras_acertadas = ["_" for letra in palavra_secreta]
+
     enforcou = False
     acertou = False
-    letras_acertadas = ["_" for _ in palavra_secreta]
+    erros = 0
 
-    while not enforcou and not acertou:
-        chute = input('Qual é a letra? ')
+    print(letras_acertadas)
 
-        index = 0
-        for letra in palavra_secreta:
-            if (chute.upper() == letra.upper()):
-                print(f'Encontrei a letra {letra} na posição {index}')
-                index = palavra_secreta
-                letras_acertadas[index] = letra
-            index = index + 1
-        print(str(letras_acertadas)
+    while(not enforcou and not acertou):
 
+        chute = input("Qual letra? ")
+        chute = chute.strip().upper()
+
+        if(chute in palavra_secreta):
+            index = 0
+            for letra in palavra_secreta:
+                if(chute == letra):
+                    letras_acertadas[index] = letra
+                index += 1
+        else:
+            erros += 1
+
+        enforcou = erros == 6
+        acertou = "_" not in letras_acertadas
+        print(letras_acertadas)
+
+
+    if(acertou):
+        print("Você ganhou!!")
+    else:
+        print("Você perdeu!!")
     print("Fim do jogo")
 
-if __name__ == '__main__':
-    forca()
+if(__name__ == "__main__"):
+    jogar()
